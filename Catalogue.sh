@@ -39,6 +39,7 @@ useradd --system --home /app --shell /sbin/nologin --comment "roboshop system us
 validate "system user adding"
 else
 echo -e "$Y roboshop user already exists..skipping $N"
+fi
 
 mkdir -p /app 
 validate "creating directory"
