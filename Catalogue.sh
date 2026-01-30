@@ -56,7 +56,7 @@ validate "unzip catalogue code"
 npm install &>>$log_file
 validate "installing dependencies"
 
-cp $SCRIPT_DIR/Catalogue.service /etc/systemd/system/catalogue.service
+cp $SCRIPT_DIR/ctalogue.service /etc/systemd/system/catalogue.service
 validate "created systemctl service"
 
 systemctl daemon-reload
