@@ -47,10 +47,10 @@ curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue
 validate "downloading catalogue code"
 cd /app 
 validate "inside app dictory"
-rm -rf /app/*
+rm -rf /app/* &>>$log_file
 validate "removing existing files"
 
-unzip /tmp/catalogue.zip
+unzip /tmp/catalogue.zip &>>$log_file
 validate "unzip catalogue code"
 
 npm install &>>$log_file
