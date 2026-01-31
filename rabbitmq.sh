@@ -24,13 +24,13 @@ fi
 }
 
 cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
-dnf list installed rabbitmq-server &>> $log_file
-if [ $? -eq 0 ];then
-echo  -e "$Y rabbitmq is already installed $N" | tee -a $log_file
-else
+# dnf list installed rabbitmq-server &>> $log_file
+# if [ $? -eq 0 ];then
+# echo  -e "$Y rabbitmq is already installed $N" | tee -a $log_file
+# else
 dnf install rabbitmq-server -y &>> $log_file
 validate "installing rabbitmq"
-fi
+# fi
 systemctl enable rabbitmq-server
 systemctl start rabbitmq-server
 validate "enabling and starting rabbitmq"
