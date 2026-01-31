@@ -39,5 +39,6 @@ sed -i "s/yes/no/g" /etc/redis/redis.conf
 validate "replacing"
 
 systemctl enable redis 
+validate "enabling redis"
 systemctl start redis 
-validate "enabling and starting redis"
+validate "starting redis"
