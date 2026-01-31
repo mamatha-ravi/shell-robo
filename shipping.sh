@@ -49,8 +49,8 @@ mkdir -p /app
 cd /app 
 unzip /tmp/shipping.zip &>>$log_file
 
-mvn clean package 
-mv target/shipping-1.0.jar shipping.jar 
+mvn clean package &>>$log_file
+mv target/shipping-1.0.jar shipping.jar &>>$log_file
 validate "download dependencies"
 
 cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
