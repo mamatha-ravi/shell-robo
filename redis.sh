@@ -22,17 +22,17 @@ else
 echo -e "$1.. $R failure $N" | tee -a $log_file
 fi
 }
-dnf list installed redis &>> $log_file
-if [ $? -eq 0 ];then
-echo  -e "$Y redis is already installed $N" | tee -a $log_file
-else
- dnf module disable redis -y
+# dnf list installed redis &>> $log_file
+# if [ $? -eq 0 ];then
+# echo  -e "$Y redis is already installed $N" | tee -a $log_file
+# else
+ dnf module disable redis -y $log_file
  validate "disabling redis"
 dnf module enable redis:7 -y &>> $log_file
 validate "enabling redis"
 dnf install redis -y &>> $log_file
 validate "installed redis"
-fi
+# fi
 
 sed -i "s/127.0.0.1/0.0.0.0/g" /etc/redis/redis.conf
 sed -i "s/yes/no/g" /etc/redis/redis.conf

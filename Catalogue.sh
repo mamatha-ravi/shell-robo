@@ -26,17 +26,17 @@ fi
 }
 # dnf module disable nodejs -y &>>$log_file
 # validate "disabling nodejs"
-if command -v node &>/dev/null; then
-  echo "Node.js already installed"
-else
-  echo "Installing Node.js"
+# if command -v node &>/dev/null; then
+#   echo "Node.js already installed"
+# else
+#   echo "Installing Node.js"
  
 dnf module enable nodejs:20 -y &>>$log_file
 validate "enabling nodejs"
 
 dnf install nodejs -y &>>$log_file
 validate "installing nodejs"
-fi
+# fi
 id roboshop 
 if [ $? -ne 0 ]; then
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop

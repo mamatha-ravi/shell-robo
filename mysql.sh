@@ -46,16 +46,20 @@ else
 echo -e "$1.. $R failure $N" | tee -a $log_file
 fi
 }
-dnf list installed mysql-community-server &>> $log_file
-if [ $? -eq 0 ];then
-echo  -e "$Y mysql is already installed $N" | tee -a $log_file
-else
+# dnf list installed mysql-community-server &>> $log_file
+# if [ $? -eq 0 ];then
+# echo  -e "$Y mysql is already installed $N" | tee -a $log_file
+# else
 dnf install mysql-server -y &>> $log_file
 validate "installed mysql"
-fi
+# fi
 systemctl enable mysqld
 systemctl start mysqld  
 validate "enabling and starting mysql"
 
+if mysql -u root -e "SELECT 1" &>/dev/null; then
+  echo -e "$Y MySQL root password already set, skipping $N"
+else
 mysql_secure_installation --set-root-pass RoboShop@1
 validate "default password "
+fi

@@ -22,16 +22,16 @@ else
 echo -e "$1.. $R failure $N" | tee -a $log_file
 fi
 }
-dnf list installed nginx &>> $log_file
-if [ $? -eq 0 ];then
-echo  -e "$Y nginx is already installed $N" | tee -a $log_file
-else
-# dnf module disable nginx -y
+# dnf list installed nginx &>> $log_file
+# if [ $? -eq 0 ];then
+# echo  -e "$Y nginx is already installed $N" | tee -a $log_file
+# else
+ dnf module disable nginx -y
 dnf module enable nginx:1.24 -y &>> $log_file
 validate "enabling nginx"
 dnf install nginx -y &>> $log_file
 validate "installing nginx"
-fi
+# fi
 systemctl enable nginx 
 validate "enabling systemctl nginx"
 systemctl start nginx 
