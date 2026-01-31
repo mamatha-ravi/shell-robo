@@ -46,8 +46,11 @@ mkdir -p /app
   validate "creating directory"
 
   curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$log_file
+  validate "shipping downloading"
 cd /app 
+rm -rf /app/* &>>$log_file
 unzip /tmp/shipping.zip &>>$log_file
+validate "unzip code"
 
 mvn clean package &>>$log_file
 mv target/shipping-1.0.jar shipping.jar &>>$log_file
