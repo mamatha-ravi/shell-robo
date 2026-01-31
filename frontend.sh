@@ -1,6 +1,6 @@
 #!/bin/bash
 Userid=$(id -u)
-
+SCRIPT_DIR=$PWD
 R='\e[31m'
 G='\e[32m'
 Y='\e[33m'
@@ -47,7 +47,7 @@ validate "change dir to nginx html"
 unzip /tmp/frontend.zip
 validate "unzip frontend content"
 
-cp frontend.service /etc/nginx/nginx.conf
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
 validate "nginx reverse proxy"
 
 systemctl restart nginx 
