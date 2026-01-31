@@ -55,14 +55,15 @@ rm -rf /app/* &>>$log_file
 validate "removing existing files"
 
 unzip /tmp/cart.zip &>>$log_file
-validate "unzip user code"
+validate "unzip cart code"
 
 npm install &>>$log_file
 validate "installing dependencies"
 
 cp $SCRIPT_DIR/cart.service /etc/systemd/system/cart.service
 validate "created systemctl service"
+
 systemctl daemon-reload
-systemctl enable user 
-systemctl start user
-validate "daemonreload enabling and starting user"
+systemctl enable cart 
+systemctl start cart
+validate "daemonreload enabling and starting cart"
