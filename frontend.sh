@@ -28,5 +28,28 @@ echo  -e "$Y nginx is already installed $N" | tee -a $log_file
 else
 # dnf module disable nginx -y
 dnf module enable nginx:1.24 -y &>> $log_file
+validate "enabling nginx"
 dnf install nginx -y &>> $log_file
+validate "installing nginx"
 fi
+systemctl enable nginx 
+validate "enabling systemctl nginx"
+systemctl start nginx 
+validate "starting systemctl nginx"
+rm -rf /usr/share/nginx/html/* 
+validate "removing default content"
+
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+validate "downloading frontend content"
+
+cd /usr/share/nginx/html 
+validate "change dir to nginx html"
+unzip /tmp/frontend.zip
+validate "unzip frontend content"
+
+cp nginx.conf /etc/nginx/nginx.conf
+validate "nginx reverse proxy"
+
+systemctl restart nginx 
+validate "restarting nginx"
+
