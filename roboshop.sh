@@ -56,7 +56,7 @@ do
 
 echo "IP address $IP"
 
- aws route53 change-resource-record-sets \
+ /usr/local/bin/aws route53 change-resource-record-sets \
   --hosted-zone-id $Hosting_ID \
   --change-batch '
     {
