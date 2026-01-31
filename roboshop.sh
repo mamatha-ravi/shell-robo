@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH=$PATH:/usr/local/bin
+# export PATH=$PATH:/usr/local/bin
 Userid=$(id -u)
 SG_ID="sg-01d73528856414fb1"
 AMI_ID="ami-0220d79f3f480ecf5"
