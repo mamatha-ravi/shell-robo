@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH=$PATH:/usr/local/bin
 Userid=$(id -u)
 SG_ID="sg-01d73528856414fb1"
 AMI_ID="ami-0220d79f3f480ecf5"
@@ -33,7 +34,7 @@ do
     --security-group-ids $SG_ID \
     --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance}]" \
     --query 'Instances[0].InstanceId' \
-    --output text )
+    --output text)
 
     if [ $instance == "frontend" ]; then
         IP=$(
@@ -55,7 +56,7 @@ do
 
 echo "IP address $IP"
 
-aws route53 change-resource-record-sets \
+ aws route53 change-resource-record-sets \
   --hosted-zone-id $Hosting_ID \
   --change-batch '
     {
