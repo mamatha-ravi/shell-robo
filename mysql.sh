@@ -57,9 +57,9 @@ systemctl enable mysqld
 systemctl start mysqld  
 validate "enabling and starting mysql"
 
-if mysql -u root -e "SELECT 1" &>/dev/null; then
-  echo -e "$Y MySQL root password already set, skipping $N"
-else
+# if mysql -u root -e "SELECT 1" &>/dev/null; then
+#   echo -e "$Y MySQL root password already set, skipping $N"
+# else
 mysql_secure_installation --set-root-pass RoboShop@1
 validate "default password "
-fi
+# fi
