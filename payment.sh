@@ -25,14 +25,14 @@ echo -e "$1.. $R failure $N" | tee -a $log_file
 fi
 }
 
-dnf list installed python3 &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "$Y python3 is already installed $N" | tee -a "$log_file"
+
+if rpm -q python3 &>/dev/null; then
+  echo -e "$Y python3 already installed $N"
 else
-  echo -e "$G installing python3 $N" | tee -a "$log_file"
   dnf install python3 gcc python3-devel -y &>>$log_file
-  validate "install python"
-  fi
+  validate "install python3"
+fi
+
 
  id roboshop 
 if [ $? -ne 0 ]; then
