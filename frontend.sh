@@ -47,7 +47,7 @@ validate "change dir to nginx html"
 unzip /tmp/frontend.zip
 validate "unzip frontend content"
 
-cp nginx.conf /etc/nginx/nginx.conf
+cp frontend.service /etc/nginx/nginx.conf
 validate "nginx reverse proxy"
 
 systemctl restart nginx 
