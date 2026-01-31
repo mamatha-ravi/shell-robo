@@ -59,4 +59,4 @@ validate "enabling and starting mysql"
 
 mysql_secure_installation --set-root-pass RoboShop@1
 
-    Validate  "Setting Root Password"
+    Validate "Setting Root Password"
