@@ -28,7 +28,7 @@ N='\e[0m'   # No Color
 # }
 for instance in $@
 do
-    INSTANCE_ID=$( /usr/local/bin/aws ec2 run-instances \
+    INSTANCE_ID=$( aws ec2 run-instances \
     --image-id $AMI_ID \
     --instance-type "t3.micro" \
     --security-group-ids $SG_ID \
@@ -38,7 +38,7 @@ do
 
     if [ $instance == "frontend" ]; then
         IP=$(
-            /usr/local/bin/aws ec2 describe-instances \
+            aws ec2 describe-instances \
             --instance-ids $INSTANCE_ID \
             --query 'Reservations[].Instances[].PublicIpAddress' \
             --output text
@@ -46,7 +46,7 @@ do
          RECORD_NAME="$DOMAIN_NAME" 
     else
         IP=$(
-            /usr/local/bin/aws ec2 describe-instances \
+            aws ec2 describe-instances \
             --instance-ids $INSTANCE_ID \
             --query 'Reservations[].Instances[].PrivateIpAddress' \
             --output text
@@ -56,7 +56,7 @@ do
 
 echo "IP address $IP"
 
- /usr/local/bin/aws route53 change-resource-record-sets \
+ aws route53 change-resource-record-sets \
   --hosted-zone-id $Hosting_ID \
   --change-batch '
     {
