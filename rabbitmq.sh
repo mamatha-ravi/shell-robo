@@ -30,7 +30,7 @@ echo  -e "$Y rabbitmq is already installed $N" | tee -a $log_file
 else
 dnf install rabbitmq-server -y &>> $log_file
 validate "installing rabbitmq"
-
+fi
 systemctl enable rabbitmq-server
 systemctl start rabbitmq-server
 validate "enabling and starting rabbitmq"
