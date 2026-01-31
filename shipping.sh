@@ -43,7 +43,7 @@ echo -e "$Y roboshop user already exists..skipping $N"
 fi
 
 mkdir -p /app 
-  validate "creating directory"\
+  validate "creating directory"
 
   curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$log_file
 cd /app 
