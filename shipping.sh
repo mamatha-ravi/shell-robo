@@ -25,15 +25,15 @@ echo -e "$1.. $R failure $N" | tee -a $log_file
 fi
 }
 
-dnf list installed maven &>> "$log_file"
-if [ $? -eq 0 ]; then
-  echo -e "$Y maven is already installed $N" | tee -a "$log_file"
-else
-  echo -e "$G installing maven $N" | tee -a "$log_file"
+# dnf list installed maven &>> "$log_file"
+# if [ $? -eq 0 ]; then
+#   echo -e "$Y maven is already installed $N" | tee -a "$log_file"
+# else
+#   echo -e "$G installing maven $N" | tee -a "$log_file"
 
   dnf install maven -y &>> "$log_file"
   validate "install maven"
-  fi
+  # fi
 id roboshop 
 if [ $? -ne 0 ]; then
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
