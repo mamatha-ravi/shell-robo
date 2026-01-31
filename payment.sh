@@ -25,14 +25,8 @@ echo -e "$1.. $R failure $N" | tee -a $log_file
 fi
 }
 
-
-if rpm -q python3 &>/dev/null; then
-  echo -e "$Y python3 already installed $N"
-else
   dnf install python3 gcc python3-devel -y &>>$log_file
   validate "install python3"
-fi
-
 
  id roboshop 
 if [ $? -ne 0 ]; then
@@ -45,6 +39,7 @@ fi
 mkdir -p /app 
 curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip &>>$log_file
 cd /app 
+rm -rf /app/* &>>$log_file
 unzip /tmp/payment.zip
 validate "unzip"
 
