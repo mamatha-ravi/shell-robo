@@ -40,7 +40,7 @@ mkdir -p /app
 curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip &>>$log_file
 cd /app 
 rm -rf /app/* &>>$log_file
-unzip /tmp/payment.zip
+unzip /tmp/payment.zip &>>$log_file
 validate "unzip"
 
 pip3 install -r requirements.txt &>>$log_file
