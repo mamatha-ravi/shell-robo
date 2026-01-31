@@ -50,17 +50,17 @@ fi
 # if [ $? -eq 0 ];then
 # echo  -e "$Y mysql is already installed $N" | tee -a $log_file
 # else
-dnf install mysql-server -y &>> $log_file
+dnf install mysql-server -y &>>$log_file
 validate "installed mysql"
 # fi
 systemctl enable mysqld
 systemctl start mysqld  
 validate "enabling and starting mysql"
 
-mysql -u root -pRoboShop@1 -e 'show databases;' &>>$LOGS_FILE
+mysql -u root -pRoboShop@1 -e 'show databases;' &>>$log_file
 if [ $? -ne 0 ]; then
     mysql_secure_installation --set-root-pass RoboShop@1 &>>$LOGS_FILE
-    Validate $? "Setting Root Password"
+    Validate  "Setting Root Password"
 else
     echo -e "Root password already set ... $Y SKIPPING $N"
 fi
