@@ -57,6 +57,8 @@ systemctl enable mysqld
 systemctl start mysqld  
 validate "enabling and starting mysql"
 
+# read -s -p "enter MYSQL password" MYSQLPASS
+# echo
+# mysql_secure_installation --set-root-pass $MYSQLPASS
 mysql_secure_installation --set-root-pass RoboShop@1
-
 validate "setting rootpassword"

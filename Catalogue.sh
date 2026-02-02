@@ -1,8 +1,12 @@
 #!/bin/bash
 USER_ID=$(id -u)
+# set -e
+# trap 'echo "There is an error in $LINENO, Command: $BASH_COMMAND"' ERR
 LOG_FOLDER="/var/log/shell-roboshop"
 LOGS_FILE="/var/log/shell-roboshop/$0.log"
-SCRIPTD=$PWD
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+
+# SCRIPT_DIR=$PWD
 DB_HOST="mongodb.devops88s.online"
 R="\e[31m"
 G="\e[32m"
@@ -13,7 +17,8 @@ echo -e "$R Please run the script with root user $N"
 exit 1
 fi
 mkdir -p "$LOG_FOLDER"
-Validate() { if [ "$1" -ne 0 ]; then
+Validate() {
+     if [ "$1" -ne 0 ]; then
 echo -e " "$2" ... is "$R" Failed $N" | tee -a  "$LOGS_FILE"
 exit 1
 else
@@ -45,7 +50,7 @@ unzip /tmp/catalogue.zip &>>$LOGS_FILE
 Validate $? "Redirecting to the app folder"
 npm install &>>$LOGS_FILE
 Validate $? "Installing the dependencies"
-cp $SCRIPTD/ctalogue.service /etc/systemd/system/catalogue.service &>>$LOGS_FILE
+cp $SCRIPT_DIR/ctalogue.service /etc/systemd/system/catalogue.service &>>$LOGS_FILE
 Validate $? "coping the service file"
 systemctl daemon-reload &>>$LOGS_FILE
 Validate $? "RELOADING THE SERVICES"
@@ -53,7 +58,7 @@ systemctl enable catalogue &>>$LOGS_FILE
 Validate $? "enabling the catalogue"
 systemctl start catalogue &>>$LOGS_FILE
 Validate $? "starting catalogue"
-cp $SCRIPTD/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGS_FILE
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGS_FILE
 Validate $? "copying mongo repo"
 dnf install mongodb-mongosh -y &>>$LOGS_FILE
 Validate $? "installing mongodb client"

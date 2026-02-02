@@ -2,7 +2,7 @@
 Userid=$(id -u)
 SCRIPT_DIR=$PWD
 mongodb_host="mongodb.devops88sonline.com"
-
+SQL_HOST="mysql.devops88s.online"
 R='\e[31m'
 G='\e[32m'
 Y='\e[33m'
@@ -71,13 +71,13 @@ dnf install mysql -y &>>$log_file
 validate "install sql"
 
 
-mysql -h mysql.devops88s.online -uroot -pRoboShop@1 < /app/db/schema.sql &>>$log_file
+mysql -h $SQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql &>>$log_file
 validate "schema"
 
-mysql -h mysql.devops88s.online -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$log_file
+mysql -h $SQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$log_file
 validate "user"
 
-mysql -h mysql.devops88s.online -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$log_file
+mysql -h $SQL_HOST -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$log_file
 validate "data"
 
 systemctl restart shipping
