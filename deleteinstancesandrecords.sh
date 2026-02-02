@@ -29,7 +29,15 @@ INSTANCES=$( aws ec2 describe-instances \
     --query "Reservations[].Instances[?Tags[?Key=='Name' && Value!='roboshop']].InstanceId" \
     --output text
 )
-
+if [ -z "$INSTANCES" ]; then
+  echo "No instances to terminate"
+  exit 0
+fi
+read -p "Are you sure you want to terminate these instances? (yes/no): " CONFIRM
+if [ "$CONFIRM" != "yes" ]; then
+  echo "Aborted"
+  exit 1
+fi
 aws ec2 terminate-instances --instance-ids $INSTANCES
 echo "Deleted all running instance other than roboshop"
 
