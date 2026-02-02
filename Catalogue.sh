@@ -4,10 +4,13 @@ USER_ID=$(id -u)
 # trap 'echo "There is an error in $LINENO, Command: $BASH_COMMAND"' ERR
 LOG_FOLDER="/var/log/shell-roboshop"
 LOGS_FILE="/var/log/shell-roboshop/$0.log"
+echo "filename is: "$0""
+echo "$0 dirname is : "$(dirname $0)""
+echo "pwd is : $PWD"
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 echo "homedir is: $SCRIPT_DIR"
- SCRIPTDIR=$PWD
- echo "PWD dir is : $SCRIPTDIR"
+#  SCRIPT_DIR=$PWD
+#  echo "PWD dir is : $SCRIPT_DIR"
 # DB_HOST="mongodb.devops88s.online"
 # R="\e[31m"
 # G="\e[32m"
