@@ -33,10 +33,10 @@ validate "enabling redis"
 dnf install redis -y &>> $log_file
 validate "installed redis"
 # fi
-
-sed -i "s/127.0.0.1/0.0.0.0/g" /etc/redis/redis.conf
-sed -i "s/yes/no/g" /etc/redis/redis.conf
-validate "replacing"
+sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf
+# sed -i "s/127.0.0.1/0.0.0.0/g" /etc/redis/redis.conf
+# sed -i "s/yes/no/g" /etc/redis/redis.conf
+validate "replacing no and giving permission to all"
 
 systemctl enable redis 
 validate "enabling redis"
